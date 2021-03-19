@@ -1,12 +1,5 @@
-class Book {
-  series: string;
-  price: number;
-}
-
-class ShoppingCartRow {
-  book: Book;
-  quantity: number;
-}
+import { Book } from "./Book";
+import { ShoppingCartRow } from "./ShoppingCartRow";
 
 export default class ShoppingCart {
   private _rows: ShoppingCartRow[];
@@ -24,7 +17,7 @@ export default class ShoppingCart {
 
   getDiscountedPrice = (): number => {
     // if no rows on the shopping cart return 0;
-    if (this._rows == undefined) {
+    if (this._rows == undefined || this._rows.length == 0) {
       return 0;
     }
     //get the grossPriceWithout any discount
@@ -78,9 +71,6 @@ export default class ShoppingCart {
    * Returns the max quantity of the order
    */
   private _getMaxQuantity(): number {
-    if (this._rows == undefined || this._rows.length == 0) {
-      return 0;
-    }
     return Math.max(...this._rows.map((row) => row.quantity));
   }
 
